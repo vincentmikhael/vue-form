@@ -1,24 +1,26 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="nav" class="text-center">
+      <img src="./assets/good-boy.png">
     </div>
     <router-view/>
   </div>
 </template>
 
 <style lang="scss">
+html{
+  padding: 0px;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  font-family: 'Lato', sans-serif;
   color: #2c3e50;
 }
-
+body{
+  margin: 0;
+}
 #nav {
   padding: 30px;
+  background-color: #F5A623;
 
   a {
     font-weight: bold;
