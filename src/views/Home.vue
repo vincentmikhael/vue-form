@@ -7,7 +7,6 @@
   <div class="row">
     <div class="col">
       <input autofocus type="text" v-model="sender_name" class="form-control input" placeholder="Sender Name">
-      {{sender_name}}
     </div>
     <div class="col">
       <input type="text" v-model="sender_email" class="form-control input" placeholder="Sender Email">
@@ -44,6 +43,7 @@
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import Vue from 'vue'
+import Axios from 'axios'
 
 export default {
   name: 'Home',
@@ -71,9 +71,32 @@ export default {
           type: 'error'
         })
         }else{
-          Vue.$toast.success('✅ Data confirmed, you may proceed',{
+
+          Axios.post('http://localhost:1337/data',{
+            sender_name: this.sender_name,
+            sender_email: this.sender_email,
+            recipient_email: this.recipient_email,
+            recipient_name: this.recipient_name,
+            message: this.message,
+          }).then(e=>{
+            if(e.data.isError == '0'){
+              Vue.$toast.success('✅ Data confirmed, you may proceed',{
           type: 'success'
         })
+            }else{
+              Vue.$toast.success('⚠ Oops!! Something went wrong with server.',{
+          type: 'danger'
+        })
+            }
+
+            this.sender_name = ''
+            this.sender_email = ''
+            this.recipient_email = ''
+            this.recipient_name = ''
+            this.message = ''
+          })
+
+          
         }
         
       }
